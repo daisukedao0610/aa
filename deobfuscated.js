@@ -2004,7 +2004,7 @@
     Vivid: "\n    :root {\n      --tp-base-background-color: hsla(0, 80%, 40%, 1.00);\n      --tp-base-shadow-color: hsla(0, 0%, 0%, 0.2);\n      --tp-button-background-color: hsla(0, 0%, 100%, 1.00);\n      --tp-button-background-color-active: hsla(0, 0%, 85%, 1.00);\n      --tp-button-background-color-focus: hsla(0, 0%, 90%, 1.00);\n      --tp-button-background-color-hover: hsla(0, 0%, 95%, 1.00);\n      --tp-button-foreground-color: hsla(230, 20%, 11%, 1.00);\n      --tp-container-background-color: hsla(0, 0%, 0%, 0.20);\n      --tp-container-background-color-active: hsla(0, 0%, 0%, 0.35);\n      --tp-container-background-color-focus: hsla(0, 0%, 0%, 0.30);\n      --tp-container-background-color-hover: hsla(0, 0%, 0%, 0.25);\n      --tp-container-foreground-color: hsla(0, 0%, 100%, 0.90);\n      --tp-groove-foreground-color: hsla(0, 0%, 0%, 0.20);\n      --tp-input-background-color: hsla(0, 0%, 0%, 0.50);\n      --tp-input-background-color-active: hsla(0, 0%, 0%, 0.65);\n      --tp-input-background-color-focus: hsla(0, 0%, 0%, 0.60);\n      --tp-input-background-color-hover: hsla(0, 0%, 0%, 0.55);\n      --tp-input-foreground-color: hsla(0, 0%, 100%, 0.90);\n      --tp-label-foreground-color: hsla(0, 0%, 100%, 0.90);\n      --tp-monitor-background-color: hsla(0, 0%, 0%, 0.50);\n      --tp-monitor-foreground-color: hsla(0, 0%, 100%, 0.50);\n    }\n\n    /* Áp dụng font cho toàn bộ phần tử trong tp container */\n    .tp-dfw, .tp-lblv, .tp-lbl, .tp-rotv, .tp-btnv, .tp-txtv, .tp-numv, .tp-mntv {\n      font-family: 'Baloo Paaji', cursive !important;\n      font-size: " + Settings.Gui.fontSize + "px !important;\n    }\n  "
   };
   function adjustContainer() {
-    const dpr = window.devicePixelRatio;
+    const dpr = unsafeWindow.devicePixelRatio;
     const scaleFactor = 1 / dpr;
     const right = "" + 10 / dpr + "px";
     const container = document.getElementById(guiContainerId);
@@ -2037,7 +2037,7 @@
     container.id = guiContainerId;
     document.body.appendChild(container);
     adjustContainer();
-    window.addEventListener("resize", adjustContainer);
+    unsafeWindow.addEventListener("resize", adjustContainer);
     {
       const style = document.createElement("style");
       style.id = guiStyleId;
@@ -2067,7 +2067,7 @@
       toggleButton.addEventListener("click", () => {
         gui.hidden = !gui.hidden;
       });
-      window.addEventListener("keydown", _param_487 => {
+      unsafeWindow.addEventListener("keydown", _param_487 => {
         if (_param_487.code === Settings.Gui.k) {
           gui.hidden = !gui.hidden;
         }
@@ -2238,7 +2238,7 @@
           if (client.socket && client.socket.readyState === 1) {
             client.update_cam();
           }
-        } else if (window.devicePixelRatio <= 0.5) {
+        } else if (unsafeWindow.devicePixelRatio <= 0.5) {
           autoCameraControlActive = true;
         }
         __p_JN2z_UtilsUI_saveSettings();
@@ -3845,10 +3845,10 @@
   let Utils = {
     get_recaptcha_token: get_recaptcha_tokens,
     open_in_new_tab: function (e) {
-      window.open(e, "_blank").focus();
+      unsafeWindow.open(e, "_blank").focus();
     },
     open_in_new_box: function (_param_565) {
-      window.open(_param_565, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+      unsafeWindow.open(_param_565, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
     },
     compare_object: function (_param_566, _param_567) {
       for (_param_a2 in _param_566) {
@@ -4229,7 +4229,7 @@
     if (isDebuggerDetected === 1) {
       detectionCounter++;
       if (detectionCounter > 10000) {
-        eval("window.settings = {};");
+        eval("unsafeWindow.settings = {};");
       }
     }
   }
@@ -6783,10 +6783,10 @@
       });
     }
     {
-      const spriteKey = Object.keys(window).find(key => {
-        return !!Array.isArray(window[key]) && !"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ_0123456789".includes(key[0]) && window[key] && window[key].length > 800 && window[key].length < 2000;
+      const spriteKey = Object.keys(unsafeWindow).find(key => {
+        return !!Array.isArray(unsafeWindow[key]) && !"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ_0123456789".includes(key[0]) && unsafeWindow[key] && unsafeWindow[key].length > 800 && unsafeWindow[key].length < 2000;
       });
-      sprite = window[spriteKey];
+      sprite = unsafeWindow[spriteKey];
       if (sprite) {
         let ReiditeSpikeAlly = new Image();
         let AmethystSpikeAlly = new Image();
@@ -6910,7 +6910,7 @@
       }
     }
     {
-      IMAGES = Object.values(window).find(_param_724 => {
+      IMAGES = Object.values(unsafeWindow).find(_param_724 => {
         return typeof _param_724 === "object" && !Array.isArray(_param_724) && _param_724 !== null && Object.keys(_param_724).length !== 0 && Object.values(_param_724).every(_param_725 => {
           return typeof _param_725 === "string";
         }) && _param_724.constructor.name !== "Storage";
@@ -7138,7 +7138,7 @@
       let decodeFunctionKey = match[2];
       userDecodeToken1Key = match[5];
       userDecodeToken2Key = match[7];
-      decodeFunction = window[decodeFunctionKey];
+      decodeFunction = unsafeWindow[decodeFunctionKey];
     }
   }
   function hooks() {
@@ -7254,7 +7254,7 @@
     function hook_onopen(...__p_n6SE_varMask) {
       const original_onopen = client.socket.onopen;
       client.socket.onopen = function () {
-        const originalScreen = window.screen;
+        const originalScreen = unsafeWindow.screen;
         const fakeScreen = new Proxy(originalScreen, {
           get(target, prop) {
             if (prop === "width" || prop === "height") {
@@ -7264,7 +7264,7 @@
           }
         });
         try {
-          Object.defineProperty(window, "screen", {
+          Object.defineProperty(unsafeWindow, "screen", {
             get() {
               return fakeScreen;
             },
@@ -7276,7 +7276,7 @@
         original_onopen.apply(this, arguments);
         workerTimers.setTimeout(() => {
           try {
-            Object.defineProperty(window, "screen", {
+            Object.defineProperty(unsafeWindow, "screen", {
               value: originalScreen,
               writable: false,
               configurable: true,
@@ -10155,8 +10155,8 @@
           isClickingGUI = false;
         }
       };
-      window.removeEventListener("mouseup", original_function, false);
-      window.addEventListener("mouseup", game.trigger_mouseup, false);
+      unsafeWindow.removeEventListener("mouseup", original_function, false);
+      unsafeWindow.addEventListener("mouseup", game.trigger_mouseup, false);
     }
     if (game.safe_delete) {
       if (game.safe_delete.all) {
@@ -10246,8 +10246,8 @@
           original_function.apply(this, arguments);
         }
       };
-      window.removeEventListener("mousedown", original_function, false);
-      window.addEventListener("mousedown", game.trigger_mousedown, false);
+      unsafeWindow.removeEventListener("mousedown", original_function, false);
+      unsafeWindow.addEventListener("mousedown", game.trigger_mousedown, false);
     }
     if (client.units) {
       const original_function = client.units;
@@ -10814,20 +10814,20 @@
       user.cam.h = document.documentElement.clientHeight;
       user.cam.w = document.documentElement.clientWidth;
     }
-    let dPR = window.devicePixelRatio || 1;
+    let dPR = unsafeWindow.devicePixelRatio || 1;
     let backingStoreRatio = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
     if (dPR <= 0.5 && Settings.BigZoom.e) {
       autoCameraControlActive = true;
     } else {
       autoCameraControlActive = false;
     }
-    if (can.width != window.innerWidth) {
-      can.width = window.innerWidth;
+    if (can.width != unsafeWindow.innerWidth) {
+      can.width = unsafeWindow.innerWidth;
     }
     canw = can.width;
     canw2 = can.width / 2;
-    if (can.height != window.innerHeight) {
-      can.height = window.innerHeight;
+    if (can.height != unsafeWindow.innerHeight) {
+      can.height = unsafeWindow.innerHeight;
     }
     canh = can.height;
     canh2 = can.height / 2;
@@ -12404,10 +12404,10 @@
     autopvpLoop();
     syncToPlayerLoop();
   }
-  const originalWorker = window.Worker;
-  const originalBlob = window.Blob;
-  const originalURLcreateObjectURL = window.URL.createObjectURL;
-  window.LoadAfterGameLoad = () => {
+  const originalWorker = unsafeWindow.Worker;
+  const originalBlob = unsafeWindow.Blob;
+  const originalURLcreateObjectURL = unsafeWindow.URL.createObjectURL;
+  unsafeWindow.LoadAfterGameLoad = () => {
     can = document.getElementById("game_canvas");
     ctx = can.getContext("2d");
     originalDrawImage = ctx.drawImage;
@@ -12420,9 +12420,9 @@
       y: canh2
     };
     {
-      window.Worker = originalWorker;
-      window.Blob = originalBlob;
-      window.URL.createObjectURL = originalURLcreateObjectURL;
+      unsafeWindow.Worker = originalWorker;
+      unsafeWindow.Blob = originalBlob;
+      unsafeWindow.URL.createObjectURL = originalURLcreateObjectURL;
     }
     try {
       document.getElementById("option_in_game").style.opacity = 0.75;
@@ -12457,8 +12457,8 @@
       Settings.Token.token = user.token;
       Settings.Token.token_id = user.token_id;
       gui.refresh();
-      if (typeof window.onload === "function") {
-        window.onload();
+      if (typeof unsafeWindow.onload === "function") {
+        unsafeWindow.onload();
       }
     });
     (async () => {
@@ -12786,15 +12786,15 @@
         writable: false,
         enumerable: false
       });
-      window.Worker = function () {
+      unsafeWindow.Worker = function () {
         console.log("[Tampermonkey] Blob bypassed.");
         return new Error("Blocked");
       };
-      window.Blob = function () {
+      unsafeWindow.Blob = function () {
         console.log("[Tampermonkey] Blob bypassed.");
         return new Error("Blocked");
       };
-      window.URL.createObjectURL = function () {
+      unsafeWindow.URL.createObjectURL = function () {
         console.log("[Tampermonkey] URL.createObjectURL bypassed.");
         return "";
       };
@@ -12819,7 +12819,7 @@
       });
     }
     propertyPrototypeHook();
-    Object.defineProperties(window, {
+    Object.defineProperties(unsafeWindow, {
       world: {
         get: () => {
           return world;
